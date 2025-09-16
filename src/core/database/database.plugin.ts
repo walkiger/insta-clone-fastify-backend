@@ -25,6 +25,13 @@ async function databasePluginHelper(fastify: FastifyInstance) {
     caption TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+  CREATE TABLE IF NOT EXISTS reels (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thumbnail_url TEXT NOT NULL,
+    video_url TEXT NOT NULL,
+    caption TEXT,
+    views INTEGER DEFAULT 0
+  );  
 `);
 
   const transactions = createTransactionHelpers(db);
