@@ -9,13 +9,9 @@ describe("POST /posts", () => {
       img_url: "http://example.com/new-image.jpg",
       caption: "A brand new post from our test!",
     };
-    const newReelPayload = {
-      video_url: "http://example.com/new-video.mp4",
-      caption: "A brand new reel from our test!",
-    };
 
     const createdPost = { ...newPostPayload, id: 1 };
-    const createdReel = { ...newReelPayload, id: 1 };
+    //const createdReel = { ...newReelPayload, id: 1 };
 
     app.decorate("transactions", {
       posts: {
@@ -26,7 +22,7 @@ describe("POST /posts", () => {
       reels: {
         getById: jest.fn(),
         getAll: jest.fn(),
-        create: jest.fn().mockReturnValue(createdReel),
+        create: jest.fn(),
       },
     });
 

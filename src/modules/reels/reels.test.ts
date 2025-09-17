@@ -4,17 +4,7 @@ import { reelsRoutes } from "./reels.routes";
 describe("GET /reels/grid", () => {  
   it("should return a list of reels with a 200 status code", async () => {
     const app = Fastify();
-    const newPostPayload = {
-        img_url: "http://example.com/new-image.jpg",
-        caption: "A brand new post from our test!",
-      };
-      const newReelPayload = {
-        video_url: "http://example.com/new-video.mp4",
-        caption: "A brand new reel from our test!",
-      };
-  
-      const createdPost = { ...newPostPayload, id: 1 };
-      const createdReel = { ...newReelPayload, id: 1 };
+    
     const mockReels = [
       {
         id: 1,
@@ -42,12 +32,12 @@ describe("GET /reels/grid", () => {
         posts: {
           getById: jest.fn(),
           getAll: jest.fn(),
-          create: jest.fn().mockReturnValue(createdPost),
+          create: jest.fn(),
         },
         reels: {
-          getById: jest.fn(),
-          getAll: jest.fn(),
-          create: jest.fn().mockReturnValue(createdReel),
+          getById: jest.fn().mockReturnValue(mockReels),
+          getAll: jest.fn().mockReturnValue(mockReels),
+          create: jest.fn().mockReturnValue(mockReels),
         },
       });
 
