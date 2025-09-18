@@ -11,6 +11,7 @@
     "prestart": "npm run build",
     "start": "node build/server.js",
     "dev": "tsx watch src/server.ts",
+    "seed": "tsx src/core/database/seed.ts",
     "poststart": "rimraf build",
     "lint": "eslint .",
     "test": "jest"
