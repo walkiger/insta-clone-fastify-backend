@@ -39,9 +39,21 @@ describe("GET /reels/grid", () => {
           getAll: jest.fn().mockReturnValue(mockReels),
           create: jest.fn().mockReturnValue(mockReels),
         },
+        tagged: {
+          getById: jest.fn(),
+          getAll: jest.fn(),
+          create: jest.fn(),
+        },
+        highlights: {
+          getById: jest.fn(),
+          getAll: jest.fn(),
+          create: jest.fn(),
+        },
       });
 
     app.register(reelsRoutes);
+    //await app.ready(); // ensure all plugins/routes are registered
+    //console.log(app.printRoutes());
 
     const response = await app.inject({
       method: "GET",
