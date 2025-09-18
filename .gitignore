@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# database
+database.db
+
 # Runtime data
 pids
 *.pid
@@ -56,3 +59,6 @@ profile-*
 profile*
 *clinic*
 *flamegraph*
+
+# local scripts
+src/core/database/seed.ts
