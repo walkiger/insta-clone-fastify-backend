@@ -1,4 +1,9 @@
 import Fastify from "fastify";
+import multipart from "@fastify/multipart";
+import fastifyStatic from "@fastify/static";
+import path from "path";
+import fs from "fs/promises";
+import { randomUUID } from "crypto";
 import { databasePlugin } from "./core/database/database.plugin";
 import { postsRoutes } from "./modules/posts/posts.routes";
 import { reelsRoutes } from "./modules/reels/reels.routes";
@@ -7,6 +12,15 @@ import { highlightsRoutes } from "./modules/highlights/highlights.routes"
 
 const fastify = Fastify({
   logger: true,
+});
+
+// Register multipart plugin
+fastify.register(multipart);
+
+// Serve static files from ./public
+fastify.register(fastifyStatic, {
+  root: path.join(process.cwd(), "public"),
+  prefix: "/",
 });
 
 // Register our database plugin

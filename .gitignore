@@ -3,8 +3,17 @@ logs
 *.log
 npm-debug.log*
 
+# build
+build
+
 # database
 database.db
+
+# test.bak
+*bak
+
+# uploads
+public/uploads
 
 # Runtime data
 pids
