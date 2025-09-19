@@ -40,6 +40,11 @@ describe("GET /tagged/grid", () => {
             getAll: jest.fn().mockReturnValue(mockTagged),
             create: jest.fn().mockReturnValue(mockTagged),
           },
+          highlights: {
+            getById: jest.fn(),
+            getAll: jest.fn(),
+            create: jest.fn(),
+          },
         });
   
       app.register(taggedRoutes);
