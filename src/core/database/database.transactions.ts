@@ -24,7 +24,7 @@ const createTransactionHelpers = (db: Database) => {
     getHighlightById: db.prepare("SELECT * FROM highlights WHERE id = ?"),
     getAllHighlights: db.prepare("SELECT * FROM highlights"),
     createHighlight: db.prepare(
-      "INSERT INTO highlights (cover_url, title) VALUES (@cover_url, @caption) RETURNING *"),
+      "INSERT INTO highlights (cover_url, title) VALUES (@cover_url, @title) RETURNING *"),
   };
 
   const posts = {
