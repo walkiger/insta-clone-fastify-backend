@@ -16,13 +16,36 @@ const postsRoutes: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   const createPostSchema = z.object({
     caption: z.string().min(1, "Caption cannot be empty.").optional(),
   });
+  const createPostJsonSchema = z.object({
+    img_url: z.string().url(),
+    caption: z.string(),
+  });
 
   fastify.post("/posts", async (request, reply) => {
-    if (!request.isMultipart()) {
-      return reply.code(415).send({ message: "Request must be multipart" });
+    const isMultipart = typeof (request as any).isMultipart === "function"
+      ? (request as any).isMultipart()
+      : false;
+
+    if (!isMultipart) {
+      try {
+        const parsed = createPostJsonSchema.parse(request.body as any);
+        const newPost = await service.create({
+          caption: parsed.caption,
+          img_url: parsed.img_url,
+        });
+        return reply.code(201).send(newPost);
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return reply
+            .code(400)
+            .send({ message: "Validation failed", errors: error.errors });
+        }
+        fastify.log.error(error);
+        return reply.code(500).send({ message: "Failed to create post" });
+      }
     }
 
-    const parts = request.parts();
+    const parts = (request as any).parts();
 
     let caption: string | undefined;
     let imageFile: { buffer: Buffer; filename: string } | undefined;
