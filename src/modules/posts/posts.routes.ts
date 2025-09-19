@@ -17,7 +17,10 @@ const postsRoutes: FastifyPluginAsync = async (fastify: FastifyInstance) => {
     caption: z.string().min(1, "Caption cannot be empty.").optional(),
   });
   const createPostJsonSchema = z.object({
-    img_url: z.string().url(),
+    img_url: z.union([
+      z.string().url(),
+      z.string().regex(/^\/(uploads|images)\/[^\s]+$/),
+    ]),
     caption: z.string(),
   });
 

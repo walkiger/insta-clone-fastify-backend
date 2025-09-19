@@ -1,14 +1,22 @@
 import { z } from "zod";
 
+// Accept either absolute URL or relative upload path like /uploads/...
+const imageUrlSchema = z.union([
+  z.string().url(),
+  z.string().regex(/^\/(uploads|images)\/[^\s]+$/, {
+    message: "Expected relative path starting with /uploads or /images",
+  }),
+]);
+
 // First, we define the zod schemas
 const createPostDtoSchema = z.object({
-  img_url: z.string().url(),
+  img_url: imageUrlSchema,
   caption: z.string().nullable().optional(), // Caption can be a string, null, or undefined
 });
 
 const postSchema = z.object({
   id: z.number(),
-  img_url: z.string().url(),
+  img_url: imageUrlSchema,
   caption: z.string().nullable(),
   created_at: z.string(), // SQLite returns DATETIME as a string by default
 });
