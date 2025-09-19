@@ -8,14 +8,14 @@ describe("GET /tagged/grid", () => {
     const mockTagged = [
         {
           id: 1,
-          image_url:
+          img_url:
             "[https://pixabay.com/de/photos/katze-k%C3%A4tzchen-katzen-tier-9183327/](https://pixabay.com/de/photos/katze-k%C3%A4tzchen-katzen-tier-9183327/)",
           caption: "Tagged 1",
           tagger: "test user 1",
         },
         {
           id: 2,
-          image_url:
+          img_url:
             "[https://pixabay.com/de/photos/katze-k%C3%A4tzchen-wei%C3%9Fe-katze-9813484/](https://pixabay.com/de/photos/katze-k%C3%A4tzchen-wei%C3%9Fe-katze-9813484/)",
           caption: "Tagged 2",
           tagger: "test user 2",
@@ -36,9 +36,9 @@ describe("GET /tagged/grid", () => {
             create: jest.fn(),
           },
           tagged: {
-            getById: jest.fn().mockReturnValue(mockTagged),
+            getById: jest.fn(),
             getAll: jest.fn().mockReturnValue(mockTagged),
-            create: jest.fn().mockReturnValue(mockTagged),
+            create: jest.fn(),
           },
           highlights: {
             getById: jest.fn(),
