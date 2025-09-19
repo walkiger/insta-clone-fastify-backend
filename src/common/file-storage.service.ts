@@ -15,8 +15,8 @@ export const fileStorageService = {
     const filePath = path.join(uploadDir, uniqueFilename);
 
     await fs.writeFile(filePath, fileBuffer);
-
-    return `/uploads/${uniqueFilename}`;
+    const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:3000";
+    return `${baseUrl}/uploads/${uniqueFilename}`;
   },
 };
 

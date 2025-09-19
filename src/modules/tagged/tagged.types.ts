@@ -9,7 +9,7 @@ const createTaggedDtoSchema = z.object({
 
 const taggedSchema = z.object({
   id: z.number(),
-  image_url: z.string().url(),
+  img_url: z.string().url(),
   caption: z.string().nullable(),
   tagger: z.string(),
 });
